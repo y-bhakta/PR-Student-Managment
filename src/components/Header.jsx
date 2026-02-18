@@ -51,6 +51,14 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li className="sidebar-item">
+                                <Link className="sidebar-link" to="/setattandance" aria-expanded="false">
+                                    <span>
+                                        <i className="ti ti-cards" />
+                                    </span>
+                                    <span className="hide-menu">Mark Attandance</span>
+                                </Link>
+                            </li>
+                            <li className="sidebar-item">
                                 <Link className="sidebar-link" to="./authentication-login.html" aria-expanded="false">
                                     <span>
                                         <i className="ti ti-login" />

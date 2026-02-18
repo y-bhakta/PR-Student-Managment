@@ -138,7 +138,6 @@ const Viewstd = ({ students,handelDelete,handelEdit }) => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

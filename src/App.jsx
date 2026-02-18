@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import Home from './components/Home'
 import Addstd from './pages/Addstd'
 import Viewstd from './pages/Viewstd'
+import Attandance from './pages/Attandance'
 
 const App = () => {
 
@@ -38,7 +39,7 @@ const App = () => {
       setStudents(newList);
       navigator('/viewstd');
     }else{
-      setStudents([...students,{...std,id:Date.now()}]);
+      setStudents([...students,{...std,id:Date.now(),attandance:[]}]);
     }
     setStd({});
     navigator('/viewstd');
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/" element={<Home students={students} />} />
         <Route path="/addstd" element={<Addstd std={std} handelChange={handelChange} handelSubmit={handelSubmit} />} />
         <Route path="/viewstd" element={<Viewstd students={students} handelDelete={handelDelete} handelEdit={handelEdit} />} />
+        <Route path='/setattandance' element={<Attandance students={students} />} />
       </Routes>
     </>
   )
