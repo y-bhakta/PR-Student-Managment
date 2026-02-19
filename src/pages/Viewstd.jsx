@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import '../components/StudentCard.css'
+import { Link } from 'react-router-dom'
 
 const Viewstd = ({ students,handelDelete,handelEdit }) => {
     return (
@@ -61,18 +62,19 @@ const Viewstd = ({ students,handelDelete,handelEdit }) => {
                         <div className="container-fluid">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="mb-4">Students Directory</h4>
+                                    <h4 className="mb-4">Students Directory (Att = Attandance)</h4>
                                     <div className="row">
                                         {
                                             students.map((student) => {
                                                 const nameInitial = student.name ? student.name.charAt(0).toUpperCase() : 'S'
                                                 return (
-                                                    <div className="col-md-4 mb-4">
+                                                    <div className="col-md-6 col-lg-4 mb-4">
                                                         <div className="student-card">
                                                             <div className="student-card-header">
-                                                                <h5 className="student-name">
-                                                                    <span className="name-icon">{nameInitial}</span>
-                                                                    {student.name}
+                                                                <h5 className="student-name d-flex align-items-center justify-content-between">
+                                                                    <span className='d-flex'><span className="name-icon">{nameInitial}</span>
+                                                                    <span className='ms-1'>{student.name}</span></span>
+                                                                    <Link to={`/attandance/${student.id}`} className='btn btn-primary'>Att</Link>
                                                                 </h5>
                                                             </div>
                                                             <div className="student-card-body">

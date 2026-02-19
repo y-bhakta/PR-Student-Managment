@@ -1,35 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
+import { useParams } from 'react-router-dom'
 
-const Attandance = ({ students, setStudents }) => {
+const StdAtt = ({students}) => {
 
-    const [attandance, setAttandance] = useState([]);
-    const today = new Date().toLocaleDateString();
+  const {id}=useParams();  
+  const [student,setStudent]=useState(null);
 
-    const handelSelect = (e, id) => {
-        const { name, value } = e.target;
-        const stu = students.find((std) => std.id === id);
-        const data = { [name]: value, name: stu.name, date: new Date().toLocaleDateString() };
-        setAttandance([...attandance, data]);
-    };
-    const handelAttandance = () => {
-        const newStudents = students.map(std => {
-            const att = attandance.find((a) => a.name === std.name);
-            if (att) {
-                return { ...std, attandance: [...(std.attandance || []), att] };
-            } else {
-                return { ...std, attandance: std.attandance || [] };
-            }
-        });
-        setStudents(newStudents);
+  useEffect(()=>{
+    if (id && students?.length) {
+      const found = students.find(s => String(s.id) === String(id)) || null;
+      setStudent(found);
     }
+  },[id,students]);
 
-    console.log(students);
-    console.log(attandance);
-
-    return (
-        <>
-            <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  if (!student) return <div className="page-wrapper">Loading student attendance...</div>;
+    
+  return (
+    <>
+      <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
                 {/* Sidebar Start */}
                 <Header />
                 {/*  Sidebar End */}
@@ -85,52 +74,26 @@ const Attandance = ({ students, setStudents }) => {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12 d-flex align-items-center justify-content-between">
-                                    <h4>Mark Today's Attandance</h4>
-                                    <h4>Today's Date : {new Date().toLocaleDateString()}</h4>
-                                </div>
-                                <div className="col-12 py-2 d-flex justify-content-end">
-                                    <div>
-                                        <div className="btn btn-primary" onClick={handelAttandance} >Mark</div>
-                                    </div>
+                                    <h4>Student's Attandance</h4>
+                                    <h4>{student.name}</h4>
                                 </div>
                                 <div className="col-12 py-2">
                                     <table className='col-12 table table-bordered'>
                                         <thead>
                                             <tr>
                                                 <th>Sr. No</th>
-                                                <th>Name</th>
-                                                <th>Course</th>
                                                 <th>Date</th>
                                                 <th>Attandance</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
-                                                students.map((std, i) => {
+                                                student.attandance.map((att,i)=>{
                                                     return (
-                                                        <tr key={i + 1}>
-                                                            <td>{i + 1}</td>
-                                                            <td>{std.name}</td>
-                                                            <td>{std.course}</td>
-                                                            <td>{new Date().toLocaleDateString()}</td>
-                                                            <td>
-                                                                {  
-                                                                    std.attandance?.some(a => a.date === today) ? (
-                                                                    <span>Marked</span>
-                                                                    ) : (
-                                                                    <select
-                                                                        name="status"
-                                                                        id="attStatus"
-                                                                        onChange={(e) => handelSelect(e, std.id)}
-                                                                        defaultValue=""
-                                                                    >
-                                                                        <option value="" disabled>Status</option>
-                                                                        <option value="Present">P</option>
-                                                                        <option value="Absent">A</option>
-                                                                    </select>
-                                                                    )
-                                                                }
-                                                            </td>
+                                                        <tr key={i+1}>
+                                                            <td>{i+1}</td>
+                                                            <td>{att.date}</td>
+                                                            <td>{att.status}</td>
                                                         </tr>
                                                     )
                                                 })
@@ -143,8 +106,8 @@ const Attandance = ({ students, setStudents }) => {
                     </div>
                 </div>
             </div>
-        </>
-    )
+    </>
+  )
 }
 
-export default Attandance
+export default StdAtt

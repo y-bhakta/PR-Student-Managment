@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Addstd from './pages/Addstd'
 import Viewstd from './pages/Viewstd'
 import Attandance from './pages/Attandance'
+import StdAtt from './pages/StdAtt'
 
 const App = () => {
 
@@ -61,7 +62,8 @@ const App = () => {
         <Route path="/" element={<Home students={students} />} />
         <Route path="/addstd" element={<Addstd std={std} handelChange={handelChange} handelSubmit={handelSubmit} />} />
         <Route path="/viewstd" element={<Viewstd students={students} handelDelete={handelDelete} handelEdit={handelEdit} />} />
-        <Route path='/setattandance' element={<Attandance students={students} />} />
+        <Route path='/setattandance' element={<Attandance students={students} setStudents={setStudents} />} />
+        <Route path='/attandance/:id' element={<StdAtt students={students}/>} />
       </Routes>
     </>
   )
