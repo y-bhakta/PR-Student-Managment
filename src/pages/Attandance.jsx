@@ -123,8 +123,9 @@ const Attandance = ({ students, setStudents }) => {
                                                                         id="attStatus"
                                                                         onChange={(e) => handelSelect(e, std.id)}
                                                                         defaultValue=""
+                                                                        className='form-control'
                                                                     >
-                                                                        <option value="" disabled>Status</option>
+                                                                        <option value="" disabled>Status ^</option>
                                                                         <option value="Present">P</option>
                                                                         <option value="Absent">A</option>
                                                                     </select>

@@ -93,7 +93,11 @@ const StdAtt = ({students}) => {
                                                         <tr key={i+1}>
                                                             <td>{i+1}</td>
                                                             <td>{att.date}</td>
-                                                            <td>{att.status}</td>
+                                                            <td>
+                                                                {
+                                                                att.status === "Present" ? <span className='badge bg-success'>Present</span> : <span className='badge bg-danger'>Absent</span>
+                                                                }
+                                                                </td>
                                                         </tr>
                                                     )
                                                 })
