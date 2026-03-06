@@ -64,6 +64,7 @@ const App = () => {
         <Route path="/viewstd" element={<Viewstd students={students} handelDelete={handelDelete} handelEdit={handelEdit} />} />
         <Route path='/setattandance' element={<Attandance students={students} setStudents={setStudents} />} />
         <Route path='/attandance/:id' element={<StdAtt students={students}/>} />
+        <Route path='*' element={<Home students={students}/>} />
       </Routes>
     </>
   )
