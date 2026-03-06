@@ -17,3 +17,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## Live Link
 
+https://pr-student-managment.vercel.app/
